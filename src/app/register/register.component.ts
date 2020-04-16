@@ -34,52 +34,45 @@ export class RegisterComponent implements OnInit {
   public message: string;
 
   country: Country;
-
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
     private registerService: RegistrationService,
     private toastr:ToastrService
-  ) {}
+  ) {
+   
+  }
 
   ngOnInit(): void {
     this.createForm();
-
     this.countries = this.registerService.getCountries();
     let values = JSON.stringify(this.countries);
     console.log("countries" + this.countries);
     this.onSelect(this.country.id);
   }
 
-  createForm() {
-    this.registerForm = this.formBuilder.group({
-      name: [""],
-      gender: [""],
-      country: [""],
-      state: [""],
+  createForm(){
+     this.registerForm = this.formBuilder.group({
+      name: [''],
+      gender: [''],
+      country: [''],
+      state: [''],
       phone: [],
       companyForm: this.formBuilder.group({
-        logo: [""],
-        companyname: [""],
-        email: [""],
-        job: [""],
-        year: [""],
-        isactive: [""],
+        logo: [''],
+        companyname: [''],
+        email: [''],
+        job: [''],
+        year: [''],
+        isactive: [''],
       }),
     });
   }
 
-  onSubmit() {
-    this.registration.fullName = this.registerForm.controls.name.value;
-    this.registration.gender = this.registerForm.controls.gender.value;
-    this.registration.country = this.registerForm.controls.country.value;
-    this.registration.state = this.registerForm.controls.country.value;
-    this.registration.phone = this.registerForm.controls.phone.value;
-    this.registration.companyName = this.companyForm.controls.companyName.value;
-    this.registration.emailId = this.companyForm.controls.companyName.value;
-    this.registration.jobTitle = this.companyForm.controls.job.value;
-    this.registration.yearOfExp = this.companyForm.controls.year.value;
-    this.registration.isActive = "Y";
+  onSubmit() {  
+    
+
+    console.log("form vslue" ,this.registerForm);
 
     const formData = new FormData();
     formData.append("register", JSON.stringify(this.registration));
@@ -89,8 +82,8 @@ export class RegisterComponent implements OnInit {
       (data) => console.log(data),
       (error) => console.log(error)
     );
-this.toastr.success("Registration completed");
-this.router.navigateByUrl('/login');
+    this.toastr.success("Registration completed");
+    this.router.navigateByUrl('/login');
     
   }
 
@@ -121,5 +114,5 @@ this.router.navigateByUrl('/login');
   nextLevel() {
     this.step++;
   }
-  next() {}
+  
 }

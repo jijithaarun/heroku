@@ -18,8 +18,6 @@
 
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
         <div *ngIf="step==0">
-
-
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                     <h5 class="register-heading">Add Your Personal Details</h5>
@@ -78,7 +76,7 @@
             </button>
         </div>
 
-        <div *ngIf="step==1">
+         <div *ngIf="step==1">
             <div formgroupname=" companyForm ">
                 <div class="tab-content " id="myTabContent ">
                     <div class="tab-pane fade show active " id="home " role="tabpanel " aria-labelledby="home-tab ">
@@ -125,17 +123,17 @@
             <button class="btn btn-info" (click)="nextLevel()">
                 next
             </button>
-        </div>
+        </div> 
 
 
-        <div *ngIf="step==2">
+         <div *ngIf="step==2">
             <div formgroupname="verificationForm">
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                         <h5 class="register-heading">Enter the otp here</h5>
                         <div class="row">
                             <div class="col-md">
-                                <input type="text" formcontrolname="digit" name="digit1" style="width:10px;">
+                                <input type="text" formcontrolname="digit" name="digit1" style="width:20px;">
                                 <input type="text" formcontrolname="digit" name="digit2">
                                 <input type="text" formcontrolname="digit" name="digit3">
                             </div>
@@ -143,9 +141,7 @@
                     </div>
                 </div>
             </div>
-            <button type="submit" value="submit">Submit</button>
+            <button type="submit" >Submit</button>
         </div>
-
-
     </form>
 </div>
