@@ -1,0 +1,151 @@
+<div class="container">
+    <div class="col-md-9">
+        <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+            <li class="nav-item">
+                <h6>Personal Details</h6>
+            </li>
+            <li class="nav-item">
+                <h6>Company Details</h6>
+            </li>
+            <li class="nav-item">
+                <h6>
+                    Email Verification</h6>
+            </li>
+
+        </ul>
+    </div>
+
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div *ngIf="step==0">
+
+
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <h5 class="register-heading">Add Your Personal Details</h5>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Full Name</label>
+                                <input type="text" class="form-control" formcontrolname="name" placeholder="Name *" pattern="^[a-zA-Z ]{3,30}$" #name required>
+                            </div>
+
+                            <!--gender-->
+                            <div class="form-group ">
+                                <label class="col-md-4 ">Gender</label>
+                                <br>
+                                <div class="btn-group ">
+                                    <input type="radio" class="btn btn-outline-warning" formcontrolname="gender" value="Male ">Male &nbsp;
+                                    <input type="radio" class="btn btn-outline-warning" formcontrolname="gender" value="female ">Female &nbsp;
+
+                                    <input type="radio" class="btn btn-outline-warning" formcontrolname="gender" value="other ">Other
+
+                                </div>
+                            </div>
+
+                            <!--country-->
+                            <div class="form-group ">
+                                <label class="col-md-4 ">Country
+                                </label>
+                                <select formcontrolname="country " class="form-control " (change)="onSelect($event.target.value) " required>
+                                    <option value="0 ">--Country--</option>
+                                    <option *ngFor="let country of countries " value="{{country.id}} ">
+                                        {{country.name| json }}</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group ">
+                                <label>State:</label>
+                                <select formcontrolname="state " class="form-control " required>
+                                    <option value="0 ">--Select--</option>
+                                    <option *ngFor="let state of states " value={{state.id}}>{{state.name}}</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group ">
+                                <label>Phone Number</label>
+                                <input type="text " minlength="10 " maxlength="10 " name="phone " class="form-control " formcontrolname="phone " placeholder="Your Phone * " pattern="^[7-9]{1}[0-9]{9}$ " />
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn btn-info" (click)="nextLevel()">
+                next
+            </button>
+        </div>
+
+        <div *ngIf="step==1">
+            <div formgroupname=" companyForm ">
+                <div class="tab-content " id="myTabContent ">
+                    <div class="tab-pane fade show active " id="home " role="tabpanel " aria-labelledby="home-tab ">
+                        <h5 class="register-heading ">Add Your Company Details</h5>
+
+                        <div class="row ">
+                            <div class="col-md-6 ">
+                                <div class="form-group ">
+
+                                    <span style="color:red; " *ngIf="message ">{{message}}</span>
+                                    <input #file type="file" accept='image/*' (change)="preview(file.files) " formcontrolname="logo " />
+                                    <img [src]=" imgURL" height="100" *ngIf="imgURL">
+                                </div>
+
+                                <div class="form-group ">
+                                    <label>Company Name</label>
+                                    <input type="text " class="form-control " formcontrolname="companyname " placeholder="Company Name * " pattern="^[a-zA-Z ]{3,30}$ " #companyname required>
+                                </div>
+
+                                <div class="form-group ">
+                                    <label>Email</label>
+                                    <input type="email " class="form-control " formcontrolname="email " placeholder="Your Email * " pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$ ">
+                                </div>
+
+                                <div class="form-group ">
+                                    <label>Job Title</label>
+                                    <input type="text " class="form-control " formcontrolname="job " placeholder="Your Job Title * " pattern="^[a-zA-Z ]{3,30}$ ">
+                                </div>
+
+                                <div class="form-group ">
+                                    <label>Year Of Experience</label>
+                                    <input type="text " class="form-control " formcontrolname="year " placeholder="Year of Experience * " pattern="^[0-9 ]$ ">
+                                </div>
+
+                                <div class="form-group ">
+                                    <input type="checkbox" formcontrolname="isactive "><label>I Accept Terms and Condition</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <button class="btn btn-info" (click)="nextLevel()">
+                next
+            </button>
+        </div>
+
+
+        <div *ngIf="step==2">
+            <div formgroupname="verificationForm">
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <h5 class="register-heading">Enter the otp here</h5>
+                        <div class="row">
+                            <div class="col-md">
+                                <input type="text" formcontrolname="digit" name="digit1" style="width:10px;">
+                                <input type="text" formcontrolname="digit" name="digit2">
+                                <input type="text" formcontrolname="digit" name="digit3">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" value="submit">Submit</button>
+        </div>
+
+
+    </form>
+</div>
